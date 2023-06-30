@@ -1,15 +1,24 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import q from "./data/quizzes.json";
 
-const quizzes = q;
+// States
+const quizzes = ref(q);
+const search = ref("");
+
+// Search
+watch(search, () => {
+  quizzes.value = q.filter((quiz) =>
+    quiz.name.toLowerCase().includes(search.value.toLowerCase())
+  );
+});
 </script>
 
 <template>
   <div class="container">
     <header>
       <h1>Quizes</h1>
-      <input type="text" placeholder="Search..." />
+      <input v-model="search" type="text" placeholder="Search..." />
     </header>
     <div class="options-container">
       <div v-for="quiz in quizzes" :key="quiz.id" class="card">
