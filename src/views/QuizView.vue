@@ -1,4 +1,7 @@
 <script setup>
+import QuizHeader from "../components/QuizHeader.vue";
+import Question from "../components/Question.vue";
+
 import quizzes from "../data/quizzes.json";
 import { useRoute } from "vue-router";
 
@@ -10,9 +13,17 @@ const quiz = quizzes.find((q) => q.id === quizID);
 </script>
 
 <template>
-  <div>
-    <h1>{{ quiz.img }}</h1>
-    <h1>{{ quiz.name }}</h1>
-    <h1>{{ quiz.questions }}</h1>
+  <div class="container">
+    <QuizHeader />
+    <div>
+      <Question />
+    </div>
   </div>
 </template>
+
+<style scoped>
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+</style>
